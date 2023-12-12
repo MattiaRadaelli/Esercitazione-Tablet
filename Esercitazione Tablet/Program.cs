@@ -45,11 +45,40 @@ namespace Esercitazione_Tablet
         {
             for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine($"La marca del tablet è {ar[i]._marca}");
-                Console.WriteLine($"La velocità del tablet è  {ar[i]._velocita} (espressa in GHz)");
-                Console.WriteLine($"La dimensione del tablet è {ar[i]._dimensione} (espresso in pollici)");
-                Console.WriteLine($"La durata della batteria è  {ar[i]._durata} (espresso in mAh)");
+                Console.WriteLine($"La marca del {i}° tablet è {ar[i]._marca}");
+                Console.WriteLine($"La velocità del {i}° tablet è {ar[i]._velocita} (espressa in GHz)");
+                Console.WriteLine($"La dimensione del {i}° tablet è {ar[i]._dimensione} (espresso in pollici)");
+                Console.WriteLine($"La durata della {i}° batteria è {ar[i]._durata} (espresso in mAh)");
             }          
+        }
+        public void punteggio(Tablet[] ar)
+        {
+            int punteggiosingolo = 0;
+            int punteggiototale = 0;
+            int punteggiomin = 0;
+            int punteggiomax = 0;
+            Console.WriteLine("");
+            for (int i = 0; i < 5; i++)
+            {
+                punteggiosingolo = 0;
+                punteggiosingolo += 10 * ar[i]._velocita;
+                punteggiosingolo += ar[i]._dimensione;
+                punteggiosingolo += ar[i]._durata/1000;
+                punteggiototale += punteggiosingolo;
+                if (punteggiomin > punteggiosingolo)
+                {
+                    punteggiomin = punteggiosingolo;
+                }
+                if (punteggiomax < punteggiosingolo)
+                {
+                    punteggiomax = punteggiosingolo;
+                }
+                Console.WriteLine($"Il punteggio del {i}° tablet è {punteggiosingolo}");
+            }
+            Console.WriteLine($"\nIl punteggio minimo dei tablet è {punteggiomin}");
+            Console.WriteLine($"Il punteggio massimo dei tablet è {punteggiomax}");
+            Console.WriteLine($"\nIl punteggio totale dei tablet è {punteggiototale}");
+            Console.WriteLine($"la media del punteggio dei tablet è {punteggiototale/5}");
         }
     }
     internal class Program
@@ -60,6 +89,7 @@ namespace Esercitazione_Tablet
             Tablet[] Tablet = new Tablet[5];
             AA.leggiDati(Tablet);
             AA.stampaDati(Tablet);
-         }        
+            AA.punteggio(Tablet);
+        }        
     }
 }
